@@ -213,15 +213,6 @@
   },
   {
     "num": 22,
-    "slug": "space-jam-1996",
-    "name": "Space Jam (1996)",
-    "url": "https://www.spacejam.com/1996/",
-    "cat": "Archives",
-    "blurb": "The original movie website, still online and nearly untouched since the 90s.",
-    "depth": 2
-  },
-  {
-    "num": 23,
     "slug": "camerons-world",
     "name": "Cameron’s World",
     "url": "https://cameronsworld.net",
@@ -230,7 +221,7 @@
     "depth": 3
   },
   {
-    "num": 24,
+    "num": 23,
     "slug": "the-million-dollar-homepage",
     "name": "The Million Dollar Homepage",
     "url": "https://milliondollarhomepage.com",
@@ -239,7 +230,7 @@
     "depth": 3
   },
   {
-    "num": 25,
+    "num": 24,
     "slug": "lost-media-wiki",
     "name": "Lost Media Wiki",
     "url": "https://lostmediawiki.com",
@@ -248,7 +239,7 @@
     "depth": 5
   },
   {
-    "num": 26,
+    "num": 25,
     "slug": "prelinger-archives",
     "name": "Prelinger Archives",
     "url": "https://archive.org/details/prelinger",
@@ -257,7 +248,7 @@
     "depth": 4
   },
   {
-    "num": 27,
+    "num": 26,
     "slug": "project-gutenberg",
     "name": "Project Gutenberg",
     "url": "https://gutenberg.org",
@@ -266,7 +257,7 @@
     "depth": 4
   },
   {
-    "num": 28,
+    "num": 27,
     "slug": "oocities",
     "name": "OoCities",
     "url": "https://oocities.org",
@@ -275,7 +266,7 @@
     "depth": 4
   },
   {
-    "num": 29,
+    "num": 28,
     "slug": "the-old-net",
     "name": "The Old Net",
     "url": "https://theoldnet.com",
@@ -284,7 +275,7 @@
     "depth": 3
   },
   {
-    "num": 30,
+    "num": 29,
     "slug": "old-time-radio",
     "name": "Old Time Radio",
     "url": "https://archive.org/details/oldtimeradio",
@@ -293,7 +284,7 @@
     "depth": 4
   },
   {
-    "num": 31,
+    "num": 30,
     "slug": "flightradar24",
     "name": "Flightradar24",
     "url": "https://flightradar24.com",
@@ -302,7 +293,7 @@
     "depth": 4
   },
   {
-    "num": 32,
+    "num": 31,
     "slug": "marinetraffic",
     "name": "MarineTraffic",
     "url": "https://www.marinetraffic.com",
@@ -311,7 +302,7 @@
     "depth": 4
   },
   {
-    "num": 33,
+    "num": 32,
     "slug": "earth-nullschool",
     "name": "earth :: nullschool",
     "url": "https://earth.nullschool.net",
@@ -320,7 +311,7 @@
     "depth": 3
   },
   {
-    "num": 34,
+    "num": 33,
     "slug": "submarine-cable-map",
     "name": "Submarine Cable Map",
     "url": "https://submarinecablemap.com",
@@ -329,7 +320,7 @@
     "depth": 3
   },
   {
-    "num": 35,
+    "num": 34,
     "slug": "google-earth-timelapse",
     "name": "Google Earth Timelapse",
     "url": "https://earthengine.google.com/timelapse",
@@ -338,7 +329,7 @@
     "depth": 3
   },
   {
-    "num": 36,
+    "num": 35,
     "slug": "lightningmaps",
     "name": "LightningMaps",
     "url": "https://lightningmaps.org",
@@ -347,7 +338,7 @@
     "depth": 2
   },
   {
-    "num": 37,
+    "num": 36,
     "slug": "windy",
     "name": "Windy",
     "url": "https://www.windy.com",
@@ -356,7 +347,7 @@
     "depth": 3
   },
   {
-    "num": 38,
+    "num": 37,
     "slug": "zoom-earth",
     "name": "Zoom Earth",
     "url": "https://zoom.earth",
@@ -365,7 +356,7 @@
     "depth": 3
   },
   {
-    "num": 39,
+    "num": 38,
     "slug": "explore-org",
     "name": "Explore.org",
     "url": "https://explore.org",
@@ -374,7 +365,7 @@
     "depth": 4
   },
   {
-    "num": 40,
+    "num": 39,
     "slug": "zooniverse",
     "name": "Zooniverse",
     "url": "https://zooniverse.org",
@@ -383,7 +374,7 @@
     "depth": 4
   },
   {
-    "num": 41,
+    "num": 40,
     "slug": "wikipedia-unusual-articles",
     "name": "Wikipedia: Unusual Articles",
     "url": "https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles",
@@ -392,7 +383,7 @@
     "depth": 5
   },
   {
-    "num": 42,
+    "num": 41,
     "slug": "wikipedia-random-article",
     "name": "Wikipedia Random Article",
     "url": "https://en.wikipedia.org/wiki/Special:Random",
@@ -401,7 +392,7 @@
     "depth": 5
   },
   {
-    "num": 43,
+    "num": 42,
     "slug": "tv-tropes",
     "name": "TV Tropes",
     "url": "https://tvtropes.org",
@@ -410,7 +401,7 @@
     "depth": 5
   },
   {
-    "num": 44,
+    "num": 43,
     "slug": "oeis",
     "name": "OEIS",
     "url": "https://oeis.org",
@@ -419,7 +410,7 @@
     "depth": 3
   },
   {
-    "num": 45,
+    "num": 44,
     "slug": "etymonline",
     "name": "Etymonline",
     "url": "https://etymonline.com",
@@ -428,7 +419,7 @@
     "depth": 4
   },
   {
-    "num": 46,
+    "num": 45,
     "slug": "atlas-obscura",
     "name": "Atlas Obscura",
     "url": "https://atlasobscura.com",
@@ -437,7 +428,7 @@
     "depth": 4
   },
   {
-    "num": 47,
+    "num": 46,
     "slug": "know-your-meme",
     "name": "Know Your Meme",
     "url": "https://knowyourmeme.com",
@@ -446,7 +437,7 @@
     "depth": 4
   },
   {
-    "num": 48,
+    "num": 47,
     "slug": "r-askhistorians",
     "name": "r/AskHistorians",
     "url": "https://reddit.com/r/AskHistorians",
@@ -455,7 +446,7 @@
     "depth": 4
   },
   {
-    "num": 49,
+    "num": 48,
     "slug": "the-dictionary-of-obscure-sorrows",
     "name": "The Dictionary of Obscure Sorrows",
     "url": "https://thedictionaryofobscuresorrows.com",
@@ -464,7 +455,7 @@
     "depth": 3
   },
   {
-    "num": 50,
+    "num": 49,
     "slug": "snopes",
     "name": "Snopes",
     "url": "https://snopes.com",
