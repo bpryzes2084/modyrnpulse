@@ -18,7 +18,5 @@
       "database_name": "modyrnpulse-signups",
       "database_id": "ffa8ee5c-1c77-4888-a65e-422046ca8515"
     }
-  ],
-  // Keep secrets (ADMIN_KEY) set in the dashboard from being wiped on each deploy.
-  "keep_vars": true
+  ]
 }

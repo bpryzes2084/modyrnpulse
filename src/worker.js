@@ -1,7 +1,6 @@
 // Cloudflare Worker for modyrnpulse.com.
-// Serves the static site from dist/ and handles two routes:
-//   POST /api/subscribe         saves an email address to the D1 database
-//   GET  /api/subscribers.csv   downloads every address (needs ?key=ADMIN_KEY)
+// Serves the static site from dist/ and handles one route:
+//   POST /api/subscribe   saves an email address to the D1 database
 
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]{2,}$/;
 
@@ -47,36 +46,6 @@ async function subscribe(request, env) {
   return reply(request, 200, true, 'Thanks! You’re on the list.');
 }
 
-function sameKey(a, b) {
-  if (!a || !b || a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
-}
-
-async function exportCsv(request, env) {
-  const url = new URL(request.url);
-  const key = url.searchParams.get('key') || (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
-  if (!env.ADMIN_KEY || !sameKey(key, env.ADMIN_KEY)) {
-    return new Response('Not found', { status: 404 });
-  }
-  const { results } = await env.DB.prepare('SELECT email, created_at, source FROM subscribers ORDER BY created_at').all();
-  const cell = (v) => {
-    let s = v == null ? '' : String(v);
-    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; // stop spreadsheet formula injection
-    return `"${s.replace(/"/g, '""')}"`;
-  };
-  const csv = ['email,signed_up_utc,source', ...results.map((r) => [r.email, r.created_at, r.source].map(cell).join(','))].join('\r\n');
-  const day = new Date().toISOString().slice(0, 10);
-  return new Response(csv + '\r\n', {
-    headers: {
-      'content-type': 'text/csv; charset=utf-8',
-      'content-disposition': `attachment; filename="modyrnpulse-subscribers-${day}.csv"`,
-      'cache-control': 'no-store',
-    },
-  });
-}
-
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
@@ -84,7 +53,6 @@ export default {
       if (request.method !== 'POST') return new Response('Method not allowed', { status: 405, headers: { allow: 'POST' } });
       return subscribe(request, env);
     }
-    if (pathname === '/api/subscribers.csv' && request.method === 'GET') return exportCsv(request, env);
     if (pathname.startsWith('/api/')) return new Response('Not found', { status: 404 });
     return env.ASSETS.fetch(request);
   },

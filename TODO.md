@@ -9,8 +9,6 @@
 
 ## Email sign-ups
 - [x] Sign-up form on the homepage saves addresses to the modyrnpulse-signups database in Cloudflare
-- [ ] Add the ADMIN_KEY secret to the Worker (Settings → Variables and Secrets) so the download link works
-- [ ] Download the list anytime: modyrnpulse.com/api/subscribers.csv?key=YOUR_ADMIN_KEY
 - [ ] When emailing subscribers, include a way to unsubscribe and remove anyone who asks
 
 ## Before sharing widely

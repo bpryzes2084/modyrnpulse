@@ -22,9 +22,7 @@ After that, every push to `main` redeploys the site automatically.
 
 The homepage form posts to `/api/subscribe`, which `src/worker.js` handles. Addresses are saved in the **modyrnpulse-signups** D1 database in Cloudflare (table `subscribers`).
 
-**Download the list:** visit `https://modyrnpulse.com/api/subscribers.csv?key=YOUR_ADMIN_KEY`.
-
-**Set it up:** in the Worker's **Settings → Variables and Secrets**, add a **Secret** named `ADMIN_KEY` with a long random value. Until you do, the download link returns "Not found".
+To see the addresses, open **Storage & Databases → D1 → modyrnpulse-signups → Console** in Cloudflare and run `SELECT * FROM subscribers;`
 
 To hide the form, set `"newsletter": false` in `data/site.json`.
 
