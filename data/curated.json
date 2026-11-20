@@ -26,13 +26,14 @@
     {
       "title": "Watch the planet move",
       "tag": "Live maps",
-      "desc": "Planes, ships, storms and satellites, live right now.",
+      "desc": "Planes, ships, storms and earthquakes, live right now.",
       "holes": [
         "flightradar24",
         "marinetraffic",
         "lightningmaps",
         "windy",
-        "zoom-earth"
+        "zoom-earth",
+        "usgs-earthquakes"
       ]
     },
     {
