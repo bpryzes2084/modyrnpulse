@@ -420,6 +420,15 @@
   },
   {
     "num": 45,
+    "slug": "internet-live-stats",
+    "name": "Internet Live Stats",
+    "url": "https://www.internetlivestats.com",
+    "cat": "Live Planet",
+    "blurb": "Watch the internet happen in real time: Google searches, emails, posts and videos counted as they tick by.",
+    "depth": 2
+  },
+  {
+    "num": 46,
     "slug": "wikipedia-unusual-articles",
     "name": "Wikipedia: Unusual Articles",
     "url": "https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles",
@@ -428,7 +437,7 @@
     "depth": 5
   },
   {
-    "num": 46,
+    "num": 47,
     "slug": "wikipedia-random-article",
     "name": "Wikipedia Random Article",
     "url": "https://en.wikipedia.org/wiki/Special:Random",
@@ -437,7 +446,7 @@
     "depth": 5
   },
   {
-    "num": 47,
+    "num": 48,
     "slug": "tv-tropes",
     "name": "TV Tropes",
     "url": "https://tvtropes.org",
@@ -446,7 +455,7 @@
     "depth": 5
   },
   {
-    "num": 48,
+    "num": 49,
     "slug": "oeis",
     "name": "OEIS",
     "url": "https://oeis.org",
@@ -455,7 +464,7 @@
     "depth": 3
   },
   {
-    "num": 49,
+    "num": 50,
     "slug": "etymonline",
     "name": "Etymonline",
     "url": "https://etymonline.com",
@@ -464,7 +473,7 @@
     "depth": 4
   },
   {
-    "num": 50,
+    "num": 51,
     "slug": "atlas-obscura",
     "name": "Atlas Obscura",
     "url": "https://atlasobscura.com",
@@ -473,7 +482,7 @@
     "depth": 4
   },
   {
-    "num": 51,
+    "num": 52,
     "slug": "know-your-meme",
     "name": "Know Your Meme",
     "url": "https://knowyourmeme.com",
@@ -482,7 +491,7 @@
     "depth": 4
   },
   {
-    "num": 52,
+    "num": 53,
     "slug": "r-askhistorians",
     "name": "r/AskHistorians",
     "url": "https://reddit.com/r/AskHistorians",
@@ -491,7 +500,7 @@
     "depth": 4
   },
   {
-    "num": 53,
+    "num": 54,
     "slug": "the-dictionary-of-obscure-sorrows",
     "name": "The Dictionary of Obscure Sorrows",
     "url": "https://thedictionaryofobscuresorrows.com",
@@ -500,7 +509,7 @@
     "depth": 3
   },
   {
-    "num": 54,
+    "num": 55,
     "slug": "snopes",
     "name": "Snopes",
     "url": "https://snopes.com",
