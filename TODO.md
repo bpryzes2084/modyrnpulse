@@ -7,9 +7,9 @@
 - [ ] In Square: Online Checkout → Create Checkout Link → Collect a payment → turn on "Accept recurring payments"; set price and billing frequency
 - [ ] Send the link and price to Claude (or put them in data/site.json → membership.link and membership.price) to switch it on
 
-## Email sign-ups
-- [x] Sign-up form on the homepage saves addresses to the modyrnpulse-signups database in Cloudflare
-- [ ] When emailing subscribers, include a way to unsubscribe and remove anyone who asks
+## Email sign-ups (off)
+- Form removed from the site. To turn it back on, set "newsletter": true in data/site.json.
+- [ ] Before turning it back on: plan to actually send emails, include an unsubscribe option, and cover it in the Privacy Policy
 
 ## Before sharing widely
 - [ ] Copy Privacy Policy, Terms of Service and DMCA text from modyrnpulse.pages.dev (old site) and add to content/legal/
@@ -28,4 +28,4 @@
 - [ ] Check which listed sites have affiliate programs (GeoGuessr, Windy, Flightradar24) and add "Go Pro" links
 - [ ] Amazon Associates / Bookshop.org links where a book fits
 - [ ] Tip jar (Ko-fi or Buy Me a Coffee) in the footer
-- [ ] Update the Privacy Policy to cover email sign-ups, affiliate links and Square payments
+- [ ] Update the Privacy Policy to cover affiliate links and Square payments
