@@ -6,10 +6,6 @@
   "description": "Legendary internet rabbit holes: hand-picked websites you open for a minute and close three hours later, each with a short guide.",
   "featuredSlug": "the-library-of-babel",
   "suggestEmail": "",
-  "membership": {
-    "link": "",
-    "price": "",
-    "blurb": "Modyrn Pulse is independent: no ads, no algorithm, no paid placements. Members keep it that way and keep new rabbit holes coming."
-  },
-  "newsletter": false
+  "newsletter": false,
+  "members": true
 }

@@ -1,11 +1,13 @@
 # Modyrn Pulse to-do
 
 ## Membership (Square)
-- [x] Decide what members get: supporter membership for revenue (no perks to deliver)
-- [x] Build the "Become a member" section (hidden until the link is set)
-- [ ] Decide the price (for example monthly, with an annual option)
-- [ ] In Square: Online Checkout → Create Checkout Link → Collect a payment → turn on "Accept recurring payments"; set price and billing frequency
-- [ ] Send the link and price to Claude (or put them in data/site.json → membership.link and membership.price) to switch it on
+- [x] Member accounts built: join → Square checkout → set password → members-only posts; cancellations lock out automatically
+- [ ] In Square: create subscription plans with fixed prices (suggested: $5/month and $50/year)
+- [ ] At developer.squareup.com: create an app, switch to Production, copy the Access token
+- [ ] In Cloudflare: Worker → Settings → Variables and Secrets → add Secret SQUARE_ACCESS_TOKEN
+- [ ] Do one real test signup, then cancel it in Square and check access stops (within 6 hours)
+- [ ] Write the first members-only post (content/members/, or ask Claude)
+- [ ] Add a contact email to the site so members can ask for password resets and cancellations
 
 ## Email sign-ups (off)
 - Form removed from the site. To turn it back on, set "newsletter": true in data/site.json.
@@ -28,4 +30,4 @@
 - [ ] Check which listed sites have affiliate programs (GeoGuessr, Windy, Flightradar24) and add "Go Pro" links
 - [ ] Amazon Associates / Bookshop.org links where a book fits
 - [ ] Tip jar (Ko-fi or Buy Me a Coffee) in the footer
-- [ ] Update the Privacy Policy to cover affiliate links and Square payments
+- [ ] Update the Privacy Policy to cover member accounts, Square payments and affiliate links

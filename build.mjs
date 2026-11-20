@@ -71,7 +71,8 @@ function page({ title, description, path, body, current, jsonld }) {
   const url = site.url + path;
   const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — Legendary Internet Rabbit Holes`;
   const footerLinks = [
-    site.membership?.link ? `<a href="${esc(site.membership.link)}" target="_blank" rel="noopener">Become a member</a>` : '',
+    site.members ? `<a href="/join/">Become a member</a>` : '',
+    site.members ? `<a href="/login/">Member log in</a>` : '',
     site.suggestEmail ? `<a href="mailto:${esc(site.suggestEmail)}?subject=Rabbit%20hole%20suggestion">Suggest a rabbit hole</a>` : '',
     ...legal.map((l) => `<a href="/${l.slug}/">${esc(l.title)}</a>`),
   ].filter(Boolean).join('\n      ');
@@ -105,7 +106,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
     <div class="nav-links">
       <button type="button" class="btn btn-ghost" data-panel-toggle aria-controls="all-holes" aria-expanded="true">${panelIcon}<span data-label>Hide list</span></button>
       <a class="hide-sm" href="/#curated">Collections</a>
-      ${site.membership?.link ? `<a class="hide-sm" href="/#support">Support us</a>` : ''}
+      ${site.members ? `<a class="hide-sm" href="/members/">Members</a>` : ''}
       <button type="button" class="btn btn-accent" data-random>Random hole</button>
     </div>
   </nav>
@@ -134,19 +135,18 @@ ${body}
 }
 
 function membership() {
-  const m = site.membership || {};
-  if (!m.link) return '';
+  if (!site.members) return '';
   return `<section id="support" class="band member-band" aria-labelledby="mem-title">
   <div class="wrap band-inner">
     <div>
       <p class="eyebrow">Membership</p>
-      <h2 class="h2" id="mem-title">Keep the rabbit holes<br><em>coming.</em></h2>
-      <p class="lede">${esc(m.blurb || '')}</p>
+      <h2 class="h2" id="mem-title">Go deeper.<br><em>Become a member.</em></h2>
+      <p class="lede">Members unlock members-only rabbit holes as we make them, and keep Modyrn Pulse independent: no ads, no algorithm, no paid placements.</p>
     </div>
     <div class="member-cta">
-      ${m.price ? `<p class="member-price">${esc(m.price)}</p>` : ''}
-      <a class="btn btn-accent btn-lg" href="${esc(m.link)}" target="_blank" rel="noopener">Become a member <span aria-hidden="true">↗</span></a>
-      <p class="member-note">Secure checkout by Square. Cancel anytime.</p>
+      <a class="btn btn-accent btn-lg" href="/join/">Become a member <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost btn-lg" href="/members/">See what’s inside</a>
+      <p class="member-note">Secure checkout by Square. Cancel anytime. Already a member? <a href="/login/">Log in</a></p>
     </div>
   </div>
 </section>`;
@@ -358,6 +358,67 @@ writeFileSync(join(OUT, '404.html'), page({
   body: `<div class="wrap"><section class="hero"><div class="hero-main"><p class="eyebrow">404</p><h1 class="display">This page fell<br><em>down a rabbit hole.</em></h1><p class="lede">Try one of these instead.</p></div><div class="hero-cta"><button type="button" class="btn btn-accent btn-lg" data-random>Random hole</button><a class="btn btn-ghost btn-lg" href="/">Back home</a></div></section></div>`,
 }));
 
+// ---------- Members-only content (served by the Worker, never put in dist/) ----------
+function inlineMd(s) {
+  return esc(s)
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (m, alt, src) => `<img src="${src}" alt="${alt}" loading="lazy">`)
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, text, href) => `<a href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${text}</a>`)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+function markdown(src) {
+  const out = [];
+  let para = [], list = null;
+  const flush = () => {
+    if (para.length) { out.push(`<p>${inlineMd(para.join(' '))}</p>`); para = []; }
+    if (list) { out.push(`<${list.tag}>${list.items.map((i) => `<li>${inlineMd(i)}</li>`).join('')}</${list.tag}>`); list = null; }
+  };
+  for (const line of src.split(/\r?\n/)) {
+    let m;
+    if (!line.trim()) { flush(); continue; }
+    if ((m = line.match(/^(#{2,4})\s+(.*)/))) { flush(); out.push(`<h${m[1].length}>${inlineMd(m[2])}</h${m[1].length}>`); continue; }
+    if ((m = line.match(/^>\s?(.*)/))) { flush(); out.push(`<blockquote><p>${inlineMd(m[1])}</p></blockquote>`); continue; }
+    if ((m = line.match(/^\s*[-*]\s+(.*)/)) || (m = line.match(/^\s*\d+\.\s+(.*)/))) {
+      const tag = /^\s*\d+\./.test(line) ? 'ol' : 'ul';
+      if (para.length) { out.push(`<p>${inlineMd(para.join(' '))}</p>`); para = []; }
+      if (!list || list.tag !== tag) { if (list) flush(); list = { tag, items: [] }; }
+      list.items.push(m[1]); continue;
+    }
+    if (list) flush();
+    para.push(line.trim());
+  }
+  flush();
+  return out.join('\n');
+}
+const membersDir = join(ROOT, 'content/members');
+const memberPosts = (existsSync(membersDir) ? readdirSync(membersDir) : [])
+  .filter((f) => f.endsWith('.md') && !f.startsWith('_'))
+  .map((f) => {
+    const raw = readFileSync(join(membersDir, f), 'utf8');
+    const fm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+    const meta = {};
+    if (fm) for (const l of fm[1].split(/\r?\n/)) { const i = l.indexOf(':'); if (i > 0) meta[l.slice(0, i).trim()] = l.slice(i + 1).trim().replace(/^["']|["']$/g, ''); }
+    const date = meta.date || '';
+    const d = date ? new Date(date + 'T12:00:00Z') : null;
+    return {
+      slug: slugify(meta.slug || f.replace(/\.md$/, '')),
+      title: meta.title || f.replace(/\.md$/, ''),
+      summary: meta.summary || '',
+      date,
+      dateLabel: d && !isNaN(d) ? d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : '',
+      draft: /^(true|yes)$/i.test(meta.draft || ''),
+      html: markdown(fm ? raw.slice(fm[0].length) : raw),
+    };
+  })
+  .filter((p) => !p.draft)
+  .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+const BUILD = join(ROOT, 'build');
+mkdirSync(BUILD, { recursive: true });
+writeFileSync(join(BUILD, 'members.json'), JSON.stringify(memberPosts));
+writeFileSync(join(BUILD, 'shell.html'), page({ title: '__TITLE__', description: '__DESC__', path: '__PATH__', body: '<!--BODY-->' }));
+if (site.members) urls.push('/members/', '/join/');
+
 const today = new Date().toISOString().slice(0, 10);
 writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -377,4 +438,4 @@ Allow: /
 Sitemap: ${site.url}/sitemap.xml
 `);
 
-console.log(`Built ${urls.length} pages into dist/`);
+console.log(`Built ${urls.length} pages into dist/ and ${memberPosts.length} members-only posts into build/`);

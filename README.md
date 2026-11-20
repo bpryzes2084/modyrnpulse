@@ -18,13 +18,36 @@ It's a static site with no dependencies. `node build.mjs` writes the whole site 
 
 After that, every push to `main` redeploys the site automatically.
 
-## Email sign-ups
+## Membership
 
-The homepage form posts to `/api/subscribe`, which `src/worker.js` handles. Addresses are saved in the **modyrnpulse-signups** D1 database in Cloudflare (table `subscribers`).
+Members pay through Square and log in with their email and a password. `src/worker.js` handles `/join`, `/welcome`, `/login`, `/account`, `/reset` and `/members/`. Accounts live in the **modyrnpulse-members** D1 database (schema: `migrations/0002_members.sql`).
 
-To see the addresses, open **Storage & Databases → D1 → modyrnpulse-signups → Console** in Cloudflare and run `SELECT * FROM subscribers;`
+**How it works:** a visitor picks a plan on `/join/`, and the Worker creates a Square checkout for that subscription plan. Square sends the buyer back to `/welcome/`, where the Worker confirms the subscription and the buyer sets a password. When a member visits, the Worker checks Square for an active subscription (cached for 6 hours), so people who cancel lose access on their own.
 
-To hide the form, set `"newsletter": false` in `data/site.json`.
+### One-time setup
+1. **Create the plans in Square.** In the Square Dashboard, go to Subscriptions and create a plan with fixed prices, for example $5 monthly and $50 yearly. The join page lists whatever plans Square has.
+2. **Get a Square access token.** At developer.squareup.com, create an application and switch it to **Production**. Copy the **Access token**.
+3. **Add it to Cloudflare.** In the **modyrnpulse** Worker, go to **Settings → Variables and Secrets** and add a **Secret** named `SQUARE_ACCESS_TOKEN`.
+   - Optional: `SQUARE_LOCATION_ID`. Without it, the Worker uses your first active location.
+
+Until the token is set, `/join/` shows "Memberships open soon."
+
+### Members-only posts
+Add a Markdown file to `content/members/`; `_example.md` shows the format. The file name becomes the address, for example `content/members/hidden-maps.md` becomes `/members/hidden-maps/`. Everyone can see the title and `summary`, and only active members see the rest. Members-only text is built into the Worker and never into `dist/`, so it can't be fetched directly.
+
+### Password resets
+Run this in **D1 → modyrnpulse-members → Console**, replacing both values:
+
+```sql
+UPDATE members SET reset_code = 'PICK-A-LONG-RANDOM-CODE', reset_expires = (strftime('%s','now') + 86400) * 1000
+WHERE email = 'member@example.com';
+```
+
+Then send the member `https://modyrnpulse.com/reset/?code=PICK-A-LONG-RANDOM-CODE`. The link works once and expires after 24 hours.
+
+## Email sign-ups (switched off)
+
+Set `"newsletter": true` in `data/site.json` to show the form. Addresses go to the `subscribers` table in the same database.
 
 ## Editing content
 
