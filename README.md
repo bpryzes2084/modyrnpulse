@@ -2,7 +2,9 @@
 
 50 legendary internet rabbit holes: hand-picked websites, each with a short guide.
 
-It's a static site with no dependencies. `node build.mjs` writes the whole site to `dist/`, including the homepage, one page per rabbit hole, the collection pages, `sitemap.xml`, `robots.txt` and `llms.txt`.
+It's a static site with no dependencies. `node build.mjs` writes the whole site to `dist/`, including the homepage, one page per rabbit hole, the collection pages, `sitemap.xml` and `robots.txt`.
+
+`robots.txt` asks AI assistants and AI training crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) to stay out, while regular search engines can still index the site. The list is `AI_BOTS` in `build.mjs`.
 
 ## Deploy on Cloudflare Pages
 

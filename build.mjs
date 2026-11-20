@@ -319,20 +319,17 @@ writeFileSync(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 ${urls.map((u) => `  <url><loc>${site.url}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
 `);
-writeFileSync(join(OUT, 'robots.txt'), `User-agent: *
+const AI_BOTS = ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'anthropic-ai',
+  'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'Bytespider', 'meta-externalagent',
+  'Meta-ExternalFetcher', 'Amazonbot', 'cohere-ai', 'Diffbot', 'DuckAssistBot', 'MistralAI-User', 'YouBot', 'Timpibot'];
+// AI assistants and AI training crawlers are asked to stay out. Regular search engines are allowed.
+writeFileSync(join(OUT, 'robots.txt'), `${AI_BOTS.map((b) => `User-agent: ${b}`).join('\n')}
+Disallow: /
+
+User-agent: *
 Allow: /
 
 Sitemap: ${site.url}/sitemap.xml
-`);
-writeFileSync(join(OUT, 'llms.txt'), `# ${site.name}
-
-> ${site.description}
-
-## The 50
-${CATS.map((cat) => `\n### ${cat}\n${holes.filter((h) => h.cat === cat).map((h) => `- [${h.name}](${site.url}${holePath(h)}): ${h.blurb} Site: ${h.url}`).join('\n')}`).join('\n')}
-
-## Collections
-${curated.collections.map((c) => `- [${c.title}](${site.url}/collections/${slugify(c.title)}/): ${c.desc}`).join('\n')}
 `);
 
 console.log(`Built ${urls.length} pages into dist/`);
