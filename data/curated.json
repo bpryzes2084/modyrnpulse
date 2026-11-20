@@ -1,0 +1,29 @@
+{
+  "collections": [
+    {
+      "title": "Five minutes, tops",
+      "tag": "Quick dips",
+      "desc": "For a coffee break. Easy in, easy out.",
+      "holes": ["pointer-pointer", "eel-slap", "zoom-quilt", "koalas-to-the-max", "hacker-typer"]
+    },
+    {
+      "title": "The internet’s attic",
+      "tag": "Archives",
+      "desc": "The web the way it looked before feeds and apps.",
+      "holes": ["space-jam-1996", "camerons-world", "the-old-net", "oocities", "wayback-machine"]
+    },
+    {
+      "title": "Watch the planet move",
+      "tag": "Live maps",
+      "desc": "Planes, ships, storms and satellites, live right now.",
+      "holes": ["flightradar24", "marinetraffic", "lightningmaps", "windy", "n2yo"]
+    },
+    {
+      "title": "Gone by sunrise",
+      "tag": "Bottomless",
+      "desc": "Clear your evening first. These don’t let go.",
+      "holes": ["the-library-of-babel", "tv-tropes", "infinite-craft", "geoguessr", "scp-foundation"]
+    }
+  ],
+  "editorPicks": []
+}

@@ -1,0 +1,475 @@
+[
+  {
+    "num": 1,
+    "slug": "the-library-of-babel",
+    "name": "The Library of Babel",
+    "url": "https://libraryofbabel.info",
+    "cat": "Interactive Wonders",
+    "blurb": "Every possible page of text, already written. Search any sentence and find the exact page where it lives.",
+    "depth": 5,
+    "bestFor": "Late nights, big questions",
+    "cost": "Free, no sign-up",
+    "guide": {
+      "what": [
+        "The site is built on Jorge Luis Borges’s 1941 short story about an endless library holding every book that could ever be written. Jonathan Basile turned the idea into a website: an algorithm that can produce every possible page of letters, spaces and punctuation, each with its own fixed address.",
+        "Most pages are noise. Somewhere in the noise is every sentence anyone has written or ever will. That thought is the hook."
+      ],
+      "start": [
+        [
+          "Search your own name.",
+          "Use the search page and jump to the shelf where it already exists."
+        ],
+        [
+          "Wander the hexagons.",
+          "Browse rooms, walls and shelves at random and read a few pages."
+        ],
+        [
+          "Read the story.",
+          "Borges’s original is short, and it changes how the site feels."
+        ]
+      ],
+      "why": "Every search works, and every result feels like proof of something impossible. Then you start wondering whether a page you haven’t searched for might mean something."
+    }
+  },
+  {
+    "num": 2,
+    "slug": "radio-garden",
+    "name": "Radio Garden",
+    "url": "https://radio.garden",
+    "cat": "Interactive Wonders",
+    "blurb": "Spin a globe and tune into live local radio from almost any city on Earth.",
+    "depth": 4
+  },
+  {
+    "num": 3,
+    "slug": "windowswap",
+    "name": "WindowSwap",
+    "url": "https://window-swap.com",
+    "cat": "Interactive Wonders",
+    "blurb": "Look out a stranger’s window somewhere in the world, with the sound on.",
+    "depth": 3
+  },
+  {
+    "num": 4,
+    "slug": "the-deep-sea",
+    "name": "The Deep Sea",
+    "url": "https://neal.fun/deep-sea",
+    "cat": "Interactive Wonders",
+    "blurb": "Scroll down through the ocean, meter by meter, and meet what lives at each depth.",
+    "depth": 3
+  },
+  {
+    "num": 5,
+    "slug": "the-scale-of-the-universe",
+    "name": "The Scale of the Universe",
+    "url": "https://htwins.net/scale2",
+    "cat": "Interactive Wonders",
+    "blurb": "Zoom from the smallest known things to the size of the observable universe.",
+    "depth": 4
+  },
+  {
+    "num": 6,
+    "slug": "little-alchemy-2",
+    "name": "Little Alchemy 2",
+    "url": "https://littlealchemy2.com",
+    "cat": "Interactive Wonders",
+    "blurb": "Start with four elements, combine them, and try to discover everything.",
+    "depth": 5
+  },
+  {
+    "num": 7,
+    "slug": "infinite-craft",
+    "name": "Infinite Craft",
+    "url": "https://neal.fun/infinite-craft",
+    "cat": "Interactive Wonders",
+    "blurb": "Mix words into new things. Water plus fire, then keep going forever.",
+    "depth": 5
+  },
+  {
+    "num": 8,
+    "slug": "zoom-quilt",
+    "name": "Zoom Quilt",
+    "url": "https://zoomquilt.org",
+    "cat": "Interactive Wonders",
+    "blurb": "A hand-painted image that zooms into itself and never ends.",
+    "depth": 2
+  },
+  {
+    "num": 9,
+    "slug": "the-useless-web",
+    "name": "The Useless Web",
+    "url": "https://theuselessweb.com",
+    "cat": "Interactive Wonders",
+    "blurb": "One button that sends you to a random, gloriously pointless website.",
+    "depth": 4
+  },
+  {
+    "num": 10,
+    "slug": "geoguessr",
+    "name": "GeoGuessr",
+    "url": "https://geoguessr.com",
+    "cat": "Interactive Wonders",
+    "blurb": "Dropped somewhere on Street View. Work out where you are from the clues.",
+    "depth": 5
+  },
+  {
+    "num": 11,
+    "slug": "scp-foundation",
+    "name": "SCP Foundation",
+    "url": "https://scp-wiki.wikidot.com",
+    "cat": "Weird Web",
+    "blurb": "A huge collaborative wiki of fictional containment files for anomalous objects.",
+    "depth": 5
+  },
+  {
+    "num": 12,
+    "slug": "pointer-pointer",
+    "name": "Pointer Pointer",
+    "url": "https://pointerpointer.com",
+    "cat": "Weird Web",
+    "blurb": "Move your mouse, and a photo appears of someone pointing right at it.",
+    "depth": 2
+  },
+  {
+    "num": 13,
+    "slug": "eel-slap",
+    "name": "Eel Slap",
+    "url": "https://eelslap.com",
+    "cat": "Weird Web",
+    "blurb": "Drag your mouse. A man gets slapped by an eel. That’s it, and it’s perfect.",
+    "depth": 1
+  },
+  {
+    "num": 14,
+    "slug": "find-the-invisible-cow",
+    "name": "Find the Invisible Cow",
+    "url": "https://findtheinvisiblecow.com",
+    "cat": "Weird Web",
+    "blurb": "Hunt for a hidden cow using only sound. Gets louder as you get closer.",
+    "depth": 2
+  },
+  {
+    "num": 15,
+    "slug": "koalas-to-the-max",
+    "name": "Koalas to the Max",
+    "url": "https://koalastothemax.com",
+    "cat": "Weird Web",
+    "blurb": "Hover over circles that split into smaller circles until a picture appears.",
+    "depth": 2
+  },
+  {
+    "num": 16,
+    "slug": "weave-silk",
+    "name": "Weave Silk",
+    "url": "https://weavesilk.com",
+    "cat": "Weird Web",
+    "blurb": "Draw glowing, mirrored silk patterns with your cursor. Strangely calming.",
+    "depth": 3
+  },
+  {
+    "num": 17,
+    "slug": "explorable-explanations",
+    "name": "Explorable Explanations",
+    "url": "https://ncase.me",
+    "cat": "Weird Web",
+    "blurb": "Nicky Case’s playable essays on trust, networks, and how ideas spread.",
+    "depth": 4
+  },
+  {
+    "num": 18,
+    "slug": "this-person-does-not-exist",
+    "name": "This Person Does Not Exist",
+    "url": "https://thispersondoesnotexist.com",
+    "cat": "Weird Web",
+    "blurb": "Refresh to see a face generated by AI. None of them are real people.",
+    "depth": 2
+  },
+  {
+    "num": 19,
+    "slug": "hacker-typer",
+    "name": "Hacker Typer",
+    "url": "https://hackertyper.net",
+    "cat": "Weird Web",
+    "blurb": "Mash any keys and look like a movie hacker typing real-looking code.",
+    "depth": 1
+  },
+  {
+    "num": 20,
+    "slug": "staggering-beauty",
+    "name": "Staggering Beauty",
+    "url": "https://staggeringbeauty.com",
+    "cat": "Weird Web",
+    "blurb": "Wiggle a black worm with your mouse. Shake it hard. Flashing-light warning.",
+    "depth": 1
+  },
+  {
+    "num": 21,
+    "slug": "wayback-machine",
+    "name": "Wayback Machine",
+    "url": "https://web.archive.org",
+    "cat": "Archives",
+    "blurb": "Hundreds of billions of saved web pages. Look up any site as it used to be.",
+    "depth": 5
+  },
+  {
+    "num": 22,
+    "slug": "space-jam-1996",
+    "name": "Space Jam (1996)",
+    "url": "https://www.spacejam.com/1996/",
+    "cat": "Archives",
+    "blurb": "The original movie website, still online and nearly untouched since the 90s.",
+    "depth": 2
+  },
+  {
+    "num": 23,
+    "slug": "camerons-world",
+    "name": "Cameron’s World",
+    "url": "https://cameronsworld.net",
+    "cat": "Archives",
+    "blurb": "A collage of thousands of old GeoCities pages, GIFs and all.",
+    "depth": 3
+  },
+  {
+    "num": 24,
+    "slug": "the-million-dollar-homepage",
+    "name": "The Million Dollar Homepage",
+    "url": "https://milliondollarhomepage.com",
+    "cat": "Archives",
+    "blurb": "A 2005 page that sold its pixels for a dollar each. See how many links still work.",
+    "depth": 3
+  },
+  {
+    "num": 25,
+    "slug": "lost-media-wiki",
+    "name": "Lost Media Wiki",
+    "url": "https://lostmediawiki.com",
+    "cat": "Archives",
+    "blurb": "Investigations into missing films, games, broadcasts and recordings.",
+    "depth": 5
+  },
+  {
+    "num": 26,
+    "slug": "prelinger-archives",
+    "name": "Prelinger Archives",
+    "url": "https://archive.org/details/prelinger",
+    "cat": "Archives",
+    "blurb": "Thousands of old ads, educational and industrial films, free to watch.",
+    "depth": 4
+  },
+  {
+    "num": 27,
+    "slug": "project-gutenberg",
+    "name": "Project Gutenberg",
+    "url": "https://gutenberg.org",
+    "cat": "Archives",
+    "blurb": "Tens of thousands of free public-domain books to read in your browser.",
+    "depth": 4
+  },
+  {
+    "num": 28,
+    "slug": "oocities",
+    "name": "OoCities",
+    "url": "https://oocities.org",
+    "cat": "Archives",
+    "blurb": "A mirror of the GeoCities web, frozen the year it shut down.",
+    "depth": 4
+  },
+  {
+    "num": 29,
+    "slug": "the-old-net",
+    "name": "The Old Net",
+    "url": "https://theoldnet.com",
+    "cat": "Archives",
+    "blurb": "Browse archived sites through a period-correct 90s web browser.",
+    "depth": 3
+  },
+  {
+    "num": 30,
+    "slug": "old-time-radio",
+    "name": "Old Time Radio",
+    "url": "https://archive.org/details/oldtimeradio",
+    "cat": "Archives",
+    "blurb": "Decades of radio dramas, comedies and mysteries, streamable for free.",
+    "depth": 4
+  },
+  {
+    "num": 31,
+    "slug": "flightradar24",
+    "name": "Flightradar24",
+    "url": "https://flightradar24.com",
+    "cat": "Live Planet",
+    "blurb": "Every plane in the sky right now, live on a map. Click one to follow it.",
+    "depth": 4
+  },
+  {
+    "num": 32,
+    "slug": "marinetraffic",
+    "name": "MarineTraffic",
+    "url": "https://marinetraffic.com",
+    "cat": "Live Planet",
+    "blurb": "Live ship positions across every ocean, port and canal.",
+    "depth": 4
+  },
+  {
+    "num": 33,
+    "slug": "earth-nullschool",
+    "name": "earth :: nullschool",
+    "url": "https://earth.nullschool.net",
+    "cat": "Live Planet",
+    "blurb": "A spinning globe of live winds, ocean currents and weather.",
+    "depth": 3
+  },
+  {
+    "num": 34,
+    "slug": "submarine-cable-map",
+    "name": "Submarine Cable Map",
+    "url": "https://submarinecablemap.com",
+    "cat": "Live Planet",
+    "blurb": "The undersea cables that carry the internet, mapped one by one.",
+    "depth": 3
+  },
+  {
+    "num": 35,
+    "slug": "google-earth-timelapse",
+    "name": "Google Earth Timelapse",
+    "url": "https://earthengine.google.com/timelapse",
+    "cat": "Live Planet",
+    "blurb": "Decades of satellite photos. Watch cities grow and glaciers shrink.",
+    "depth": 3
+  },
+  {
+    "num": 36,
+    "slug": "lightningmaps",
+    "name": "LightningMaps",
+    "url": "https://lightningmaps.org",
+    "cat": "Live Planet",
+    "blurb": "Lightning strikes around the world, appearing on the map as they happen.",
+    "depth": 2
+  },
+  {
+    "num": 37,
+    "slug": "windy",
+    "name": "Windy",
+    "url": "https://windy.com",
+    "cat": "Live Planet",
+    "blurb": "Beautiful animated weather maps with forecast layers for anywhere.",
+    "depth": 3
+  },
+  {
+    "num": 38,
+    "slug": "n2yo",
+    "name": "N2YO",
+    "url": "https://n2yo.com",
+    "cat": "Live Planet",
+    "blurb": "Track satellites and the space station overhead, live.",
+    "depth": 3
+  },
+  {
+    "num": 39,
+    "slug": "explore-org",
+    "name": "Explore.org",
+    "url": "https://explore.org",
+    "cat": "Live Planet",
+    "blurb": "Live nature cams: bears catching salmon, eagles nesting, reefs.",
+    "depth": 4
+  },
+  {
+    "num": 40,
+    "slug": "zooniverse",
+    "name": "Zooniverse",
+    "url": "https://zooniverse.org",
+    "cat": "Live Planet",
+    "blurb": "Help real scientists classify galaxies, animals and old handwriting.",
+    "depth": 4
+  },
+  {
+    "num": 41,
+    "slug": "wikipedia-unusual-articles",
+    "name": "Wikipedia: Unusual Articles",
+    "url": "https://en.wikipedia.org/wiki/Wikipedia:Unusual_articles",
+    "cat": "Knowledge Spirals",
+    "blurb": "Wikipedia’s own list of its strangest, most delightful pages.",
+    "depth": 5
+  },
+  {
+    "num": 42,
+    "slug": "wikipedia-random-article",
+    "name": "Wikipedia Random Article",
+    "url": "https://en.wikipedia.org/wiki/Special:Random",
+    "cat": "Knowledge Spirals",
+    "blurb": "One click, one random article. Repeat until it’s 2 a.m.",
+    "depth": 5
+  },
+  {
+    "num": 43,
+    "slug": "tv-tropes",
+    "name": "TV Tropes",
+    "url": "https://tvtropes.org",
+    "cat": "Knowledge Spirals",
+    "blurb": "Every storytelling pattern, named and linked. Famously impossible to leave.",
+    "depth": 5
+  },
+  {
+    "num": 44,
+    "slug": "oeis",
+    "name": "OEIS",
+    "url": "https://oeis.org",
+    "cat": "Knowledge Spirals",
+    "blurb": "The encyclopedia of integer sequences. Type in numbers, find the pattern.",
+    "depth": 3
+  },
+  {
+    "num": 45,
+    "slug": "etymonline",
+    "name": "Etymonline",
+    "url": "https://etymonline.com",
+    "cat": "Knowledge Spirals",
+    "blurb": "Where words came from, and the surprising routes they took.",
+    "depth": 4
+  },
+  {
+    "num": 46,
+    "slug": "atlas-obscura",
+    "name": "Atlas Obscura",
+    "url": "https://atlasobscura.com",
+    "cat": "Knowledge Spirals",
+    "blurb": "Thousands of strange and wonderful places around the world.",
+    "depth": 4
+  },
+  {
+    "num": 47,
+    "slug": "know-your-meme",
+    "name": "Know Your Meme",
+    "url": "https://knowyourmeme.com",
+    "cat": "Knowledge Spirals",
+    "blurb": "The origin story behind every meme you’ve ever seen.",
+    "depth": 4
+  },
+  {
+    "num": 48,
+    "slug": "r-askhistorians",
+    "name": "r/AskHistorians",
+    "url": "https://reddit.com/r/AskHistorians",
+    "cat": "Knowledge Spirals",
+    "blurb": "Expert-written answers to questions about any period of history.",
+    "depth": 4
+  },
+  {
+    "num": 49,
+    "slug": "the-dictionary-of-obscure-sorrows",
+    "name": "The Dictionary of Obscure Sorrows",
+    "url": "https://thedictionaryofobscuresorrows.com",
+    "cat": "Knowledge Spirals",
+    "blurb": "Invented words for feelings that never had a name.",
+    "depth": 3
+  },
+  {
+    "num": 50,
+    "slug": "snopes",
+    "name": "Snopes",
+    "url": "https://snopes.com",
+    "cat": "Knowledge Spirals",
+    "blurb": "Decades of fact-checks on urban legends, rumors and viral claims.",
+    "depth": 3
+  }
+]
