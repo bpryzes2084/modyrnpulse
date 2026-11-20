@@ -1,10 +1,11 @@
 # Modyrn Pulse to-do
 
 ## Membership (Square)
-- [ ] Decide what members get: supporter only, members-only newsletter/guides, or ad-free/members-only pages
+- [x] Decide what members get: supporter membership for revenue (no perks to deliver)
+- [x] Build the "Become a member" section (hidden until the link is set)
+- [ ] Decide the price (for example monthly, with an annual option)
 - [ ] In Square: Online Checkout → Create Checkout Link → Collect a payment → turn on "Accept recurring payments"; set price and billing frequency
-- [ ] Send the link to Claude to add a "Become a member" button and membership section
-- [ ] If members get newsletter perks: connect Square to the newsletter (Zapier or manual "paid" list)
+- [ ] Send the link and price to Claude (or put them in data/site.json → membership.link and membership.price) to switch it on
 
 ## Newsletter
 - [ ] Sign up for beehiiv (free up to 2,500 subscribers) or Kit (free up to 10,000)

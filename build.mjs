@@ -71,6 +71,7 @@ function page({ title, description, path, body, current, jsonld }) {
   const url = site.url + path;
   const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — Legendary Internet Rabbit Holes`;
   const footerLinks = [
+    site.membership?.link ? `<a href="${esc(site.membership.link)}" target="_blank" rel="noopener">Become a member</a>` : '',
     site.suggestEmail ? `<a href="mailto:${esc(site.suggestEmail)}?subject=Rabbit%20hole%20suggestion">Suggest a rabbit hole</a>` : '',
     ...legal.map((l) => `<a href="/${l.slug}/">${esc(l.title)}</a>`),
   ].filter(Boolean).join('\n      ');
@@ -104,6 +105,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
     <div class="nav-links">
       <button type="button" class="btn btn-ghost" data-panel-toggle aria-controls="all-holes" aria-expanded="true">${panelIcon}<span data-label>Hide list</span></button>
       <a class="hide-sm" href="/#curated">Collections</a>
+      ${site.membership?.link ? `<a class="hide-sm" href="/#support">Support us</a>` : ''}
       <button type="button" class="btn btn-accent" data-random>Random hole</button>
     </div>
   </nav>
@@ -129,6 +131,25 @@ ${body}
 </body>
 </html>
 `;
+}
+
+function membership() {
+  const m = site.membership || {};
+  if (!m.link) return '';
+  return `<section id="support" class="band member-band" aria-labelledby="mem-title">
+  <div class="wrap band-inner">
+    <div>
+      <p class="eyebrow">Membership</p>
+      <h2 class="h2" id="mem-title">Keep the rabbit holes<br><em>coming.</em></h2>
+      <p class="lede">${esc(m.blurb || '')}</p>
+    </div>
+    <div class="member-cta">
+      ${m.price ? `<p class="member-price">${esc(m.price)}</p>` : ''}
+      <a class="btn btn-accent btn-lg" href="${esc(m.link)}" target="_blank" rel="noopener">Become a member <span aria-hidden="true">↗</span></a>
+      <p class="member-note">Secure checkout by Square. Cancel anytime.</p>
+    </div>
+  </div>
+</section>`;
 }
 
 function newsletter() {
@@ -228,6 +249,7 @@ function home() {
     <p class="empty" id="hole-empty" hidden>No rabbit holes match that. Try another word or pick “All”.</p>
   </section>
 </div>
+${membership()}
 ${newsletter()}`;
   return page({
     path: '/', description: site.description, body,

@@ -235,3 +235,9 @@ img { max-width: 100%; display: block; }
 .link-btn:hover { color: var(--text); }
 .explore-toggle { border-radius: 12px; min-height: 48px; }
 .explore-toggle[aria-pressed="true"] { border-color: var(--accent); color: var(--accent) !important; }
+
+/* Membership */
+.member-band { background: var(--surface); }
+.member-cta { flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px; }
+.member-price { margin: 0; font: 400 44px var(--serif); color: var(--text); }
+.member-note { margin: 0; font-size: 13px; color: var(--faint); text-align: center; }
