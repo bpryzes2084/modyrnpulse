@@ -96,7 +96,6 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
     <a class="brand" href="/">${logo}<span>Modyrn <em>Pulse</em></span></a>
     <div class="nav-links">
       <button type="button" class="btn btn-ghost" data-panel-toggle aria-controls="all-holes" aria-expanded="true">${panelIcon}<span data-label>Hide list</span></button>
-      <a class="hide-sm" href="/#the-50">The 50</a>
       <a class="hide-sm" href="/#curated">Collections</a>
       <button type="button" class="btn btn-accent" data-random>Random hole</button>
     </div>

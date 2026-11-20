@@ -14,7 +14,7 @@
     toggles.forEach(function (t) {
       t.setAttribute('aria-expanded', open ? 'true' : 'false');
       var label = t.querySelector('[data-label]');
-      if (label) label.textContent = open ? 'Hide list' : 'All 50';
+      if (label) label.textContent = open ? 'Hide list' : 'Show list';
     });
   }
   function setOpen(open) {
