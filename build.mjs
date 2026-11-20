@@ -153,16 +153,19 @@ function membership() {
 }
 
 function newsletter() {
-  if (!site.newsletterFormAction) return '';
-  return `<section class="band" aria-labelledby="nl-title">
+  if (!site.newsletter) return '';
+  return `<section id="newsletter" class="band" aria-labelledby="nl-title">
   <div class="wrap band-inner">
     <div>
-      <h2 class="h2" id="nl-title">One new rabbit hole,<br><em>every Friday.</em></h2>
-      <p class="lede">A single website worth losing your weekend to. No spam, one click to leave.</p>
+      <h2 class="h2" id="nl-title">New rabbit holes,<br><em>in your inbox.</em></h2>
+      <p class="lede">Hear when we add a site worth losing an evening to. No spam, and you can unsubscribe anytime.</p>
     </div>
-    <form class="signup" action="${esc(site.newsletterFormAction)}" method="post">
-      <div class="field"><label for="nl-email">Email address</label><input class="input" id="nl-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com"></div>
+    <form class="signup" action="/api/subscribe" method="post" data-signup>
+      <div class="field"><label for="nl-email">Email address</label><input class="input" id="nl-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></div>
+      <div class="hp" aria-hidden="true"><label for="nl-website">Leave this empty</label><input id="nl-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="source" value="homepage">
       <button class="btn btn-accent" type="submit">Subscribe</button>
+      <p class="signup-msg" role="status" aria-live="polite" data-signup-msg></p>
     </form>
   </div>
 </section>`;
@@ -344,6 +347,11 @@ legal.forEach((l) => {
   write(path, page({ title: l.title, description: `${l.title} for ${site.name}.`, path, body: `<div class="wrap"><div class="prose"><h1>${esc(l.title)}</h1>${l.html}</div></div>` }));
   urls.push(path);
 });
+
+write('/subscribed/', page({
+  title: 'Subscribed', description: 'Thanks for subscribing to Modyrn Pulse.', path: '/subscribed/',
+  body: `<div class="wrap"><section class="hero"><div class="hero-main"><p class="eyebrow">Newsletter</p><h1 class="display">You’re on<br><em>the list.</em></h1><p class="lede">Thanks for subscribing. We’ll email you when there’s a new rabbit hole worth falling into.</p></div><div class="hero-cta"><button type="button" class="btn btn-accent btn-lg" data-random>Random hole</button><a class="btn btn-ghost btn-lg" href="/">Back home</a></div></section></div>`,
+}));
 
 writeFileSync(join(OUT, '404.html'), page({
   title: 'Lost', description: 'This page fell down a rabbit hole.', path: '/404',

@@ -147,3 +147,24 @@
 
   renderExplored();
 })();
+
+// Newsletter sign-up: submit without leaving the page
+(function () {
+  document.querySelectorAll('[data-signup]').forEach(function (form) {
+    var msg = form.querySelector('[data-signup-msg]');
+    var btn = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', function (e) {
+      if (!window.fetch) return;
+      e.preventDefault();
+      btn.disabled = true; msg.classList.remove('is-error'); msg.textContent = 'Signing you up…';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { accept: 'application/json' } })
+        .then(function (r) { return r.json().catch(function () { return { ok: false, message: 'Something went wrong. Please try again.' }; }); })
+        .then(function (d) {
+          msg.textContent = d.message; msg.classList.toggle('is-error', !d.ok);
+          if (d.ok) form.reset();
+        })
+        .catch(function () { msg.textContent = 'Couldn’t reach the server. Please try again.'; msg.classList.add('is-error'); })
+        .then(function () { btn.disabled = false; });
+    });
+  });
+})();

@@ -1,10 +1,24 @@
 {
-  // Cloudflare Workers config: serves the built static site from dist/.
+  // Cloudflare Workers config for modyrnpulse.com.
   // Dashboard build settings: build command `node build.mjs`, deploy command `npx wrangler deploy`.
   "name": "modyrnpulse",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
-  }
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Only /api/* runs the Worker code; every other page is served straight from dist/.
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      // Email sign-ups. Table: subscribers(email, created_at, source)
+      "binding": "DB",
+      "database_name": "modyrnpulse-signups",
+      "database_id": "ffa8ee5c-1c77-4888-a65e-422046ca8515"
+    }
+  ],
+  // Keep secrets (ADMIN_KEY) set in the dashboard from being wiped on each deploy.
+  "keep_vars": true
 }

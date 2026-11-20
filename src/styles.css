@@ -241,3 +241,8 @@ img { max-width: 100%; display: block; }
 .member-cta { flex: 1 1 320px; display: flex; flex-direction: column; gap: 12px; }
 .member-price { margin: 0; font: 400 44px var(--serif); color: var(--text); }
 .member-note { margin: 0; font-size: 13px; color: var(--faint); text-align: center; }
+
+/* Sign-up form */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.signup-msg { flex-basis: 100%; margin: 4px 0 0; font-size: 15px; min-height: 1.4em; color: var(--accent); }
+.signup-msg.is-error { color: #FF9C8A; }
