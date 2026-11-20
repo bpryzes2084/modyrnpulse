@@ -305,7 +305,7 @@
     "num": 32,
     "slug": "marinetraffic",
     "name": "MarineTraffic",
-    "url": "https://marinetraffic.com",
+    "url": "https://www.marinetraffic.com",
     "cat": "Live Planet",
     "blurb": "Live ship positions across every ocean, port and canal.",
     "depth": 4
@@ -350,18 +350,18 @@
     "num": 37,
     "slug": "windy",
     "name": "Windy",
-    "url": "https://windy.com",
+    "url": "https://www.windy.com",
     "cat": "Live Planet",
     "blurb": "Beautiful animated weather maps with forecast layers for anywhere.",
     "depth": 3
   },
   {
     "num": 38,
-    "slug": "n2yo",
-    "name": "N2YO",
-    "url": "https://n2yo.com",
+    "slug": "zoom-earth",
+    "name": "Zoom Earth",
+    "url": "https://zoom.earth",
     "cat": "Live Planet",
-    "blurb": "Track satellites and the space station overhead, live.",
+    "blurb": "Near-live satellite views of the whole planet. Watch hurricanes, wildfires and storms as they move.",
     "depth": 3
   },
   {
