@@ -1,6 +1,6 @@
 # Modyrn Pulse
 
-50 legendary internet rabbit holes: hand-picked websites, each with a short guide.
+Legendary internet rabbit holes: hand-picked websites, each with a short guide.
 
 It's a static site with no dependencies. `node build.mjs` writes the whole site to `dist/`, including the homepage, one page per rabbit hole, the collection pages, `sitemap.xml` and `robots.txt`.
 

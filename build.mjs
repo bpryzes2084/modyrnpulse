@@ -42,8 +42,8 @@ function sidePanel(current) {
   <ul>${items.map((h) => `<li><a href="${holePath(h)}"${current && current.slug === h.slug ? ' aria-current="page"' : ''}><span class="n">${pad(h.num)}</span><span>${esc(h.name)}</span></a></li>`).join('')}</ul>
 </details>`;
   }).join('\n');
-  return `<aside id="all-holes" class="side-panel" aria-label="All 50 rabbit holes">
-  <div class="side-head"><h2>All 50 holes</h2><button type="button" class="btn btn-ghost side-close" data-panel-close aria-label="Close list">Close</button><span>${CATS.length} categories</span></div>
+  return `<aside id="all-holes" class="side-panel" aria-label="All rabbit holes">
+  <div class="side-head"><h2>All rabbit holes</h2><button type="button" class="btn btn-ghost side-close" data-panel-close aria-label="Close list">Close</button><span>${CATS.length} categories</span></div>
   ${groups}
 </aside>
 <div class="scrim" data-panel-close></div>`;
@@ -62,7 +62,7 @@ function card(h) {
 
 function page({ title, description, path, body, current, jsonld }) {
   const url = site.url + path;
-  const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — 50 Legendary Internet Rabbit Holes`;
+  const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — Legendary Internet Rabbit Holes`;
   const footerLinks = [
     site.suggestEmail ? `<a href="mailto:${esc(site.suggestEmail)}?subject=Rabbit%20hole%20suggestion">Suggest a rabbit hole</a>` : '',
     ...legal.map((l) => `<a href="/${l.slug}/">${esc(l.title)}</a>`),
@@ -159,13 +159,13 @@ function home() {
   const body = `<div class="wrap">
   <section class="hero">
     <div class="hero-main">
-      <p class="eyebrow">50 websites · no algorithm · hand-picked</p>
+      <p class="eyebrow">Hand-picked websites · no algorithm</p>
       <h1 class="display">Pick a website.<br><em>Lose an evening.</em></h1>
-      <p class="lede">Fifty legendary internet rabbit holes: sites you open for a minute and close three hours later. Each one has a short guide on what it is, where to start, and how deep it goes.</p>
+      <p class="lede">Legendary internet rabbit holes: sites you open for a minute and close three hours later. Each one has a short guide on what it is, where to start, and how deep it goes.</p>
     </div>
     <div class="hero-cta">
       <button type="button" class="btn btn-accent btn-lg" data-random>Fall into a random one <span aria-hidden="true">↓</span></button>
-      <a class="btn btn-ghost btn-lg" href="#the-50">Browse all 50</a>
+      <a class="btn btn-ghost btn-lg" href="#rabbit-holes">Browse them all</a>
     </div>
   </section>
 
@@ -198,15 +198,15 @@ function home() {
     ${editorPicks()}
   </section>
 
-  <section id="the-50" class="section" aria-labelledby="all-title">
+  <section id="rabbit-holes" class="section" aria-labelledby="all-title">
     <div class="section-head">
-      <h2 class="h2" id="all-title">The 50</h2>
+      <h2 class="h2" id="all-title">All rabbit holes</h2>
       <div class="search"><label for="hole-search">Search the holes</label><input class="input" id="hole-search" type="search" placeholder="Try “maps” or “archive”"></div>
     </div>
     <div class="chips" role="group" aria-label="Filter by category">
       ${['All', ...CATS].map((c, i) => `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join('\n      ')}
     </div>
-    <p class="count-label" id="hole-count" aria-live="polite">Showing all ${holes.length}</p>
+    <p class="count-label" id="hole-count" aria-live="polite">Showing all</p>
     <div class="grid" id="hole-grid">
       ${holes.map(card).join('\n')}
     </div>
@@ -217,7 +217,7 @@ ${newsletter()}`;
   return page({
     path: '/', description: site.description, body,
     jsonld: {
-      '@context': 'https://schema.org', '@type': 'ItemList', name: '50 Legendary Internet Rabbit Holes', url: site.url + '/',
+      '@context': 'https://schema.org', '@type': 'ItemList', name: 'Legendary Internet Rabbit Holes', url: site.url + '/',
       itemListElement: holes.map((h) => ({ '@type': 'ListItem', position: h.num, name: h.name, url: site.url + holePath(h) })),
     },
   });
@@ -240,7 +240,7 @@ function holePage(h, i) {
     h.cost ? `<div class="fact"><p class="k">COST</p><p class="v">${esc(h.cost)}</p></div>` : '',
   ].join('');
   const body = `<div class="wrap">
-  <a class="back" href="/#the-50">← Back to all 50</a>
+  <a class="back" href="/#rabbit-holes">← Back to all rabbit holes</a>
   <section class="hole-hero">
     <div class="main">
       <p class="eyebrow muted"><span style="color:var(--accent)">No. ${pad(h.num)}</span> · ${esc(h.cat)}</p>
@@ -309,7 +309,7 @@ legal.forEach((l) => {
 
 writeFileSync(join(OUT, '404.html'), page({
   title: 'Lost', description: 'This page fell down a rabbit hole.', path: '/404',
-  body: `<div class="wrap"><section class="hero"><div class="hero-main"><p class="eyebrow">404</p><h1 class="display">This page fell<br><em>down a rabbit hole.</em></h1><p class="lede">Try one of the 50 instead.</p></div><div class="hero-cta"><button type="button" class="btn btn-accent btn-lg" data-random>Random hole</button><a class="btn btn-ghost btn-lg" href="/">Back home</a></div></section></div>`,
+  body: `<div class="wrap"><section class="hero"><div class="hero-main"><p class="eyebrow">404</p><h1 class="display">This page fell<br><em>down a rabbit hole.</em></h1><p class="lede">Try one of these instead.</p></div><div class="hero-cta"><button type="button" class="btn btn-accent btn-lg" data-random>Random hole</button><a class="btn btn-ghost btn-lg" href="/">Back home</a></div></section></div>`,
 }));
 
 const today = new Date().toISOString().slice(0, 10);

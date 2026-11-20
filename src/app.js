@@ -64,7 +64,7 @@
         var ok = (cat === 'All' || c.dataset.cat === cat) && (!term || c.dataset.text.indexOf(term) !== -1);
         c.hidden = !ok; if (ok) n++;
       });
-      count.textContent = n === cards.length ? 'Showing all ' + n : 'Showing ' + n + ' of ' + cards.length;
+      count.textContent = n === cards.length ? 'Showing all' : 'Showing ' + n + ' of ' + cards.length;
       empty.hidden = n !== 0;
     }
     chips.forEach(function (ch) {
