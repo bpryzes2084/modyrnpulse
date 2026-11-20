@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers config: serves the built static site from dist/.
+  // Dashboard build settings: build command `node build.mjs`, deploy command `npx wrangler deploy`.
+  "name": "modyrnpulse",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
