@@ -1,13 +1,62 @@
 (function () {
   var body = document.body;
+
+  // ---------- Explored tracking (stored only in this browser) ----------
+  var EKEY = 'mp-explored';
+  var dataEl = document.getElementById('holes-data');
+  var holes = dataEl ? JSON.parse(dataEl.textContent) : [];
+  function loadExplored() {
+    try { var a = JSON.parse(localStorage.getItem(EKEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
+  }
+  var explored = loadExplored().filter(function (s) { return holes.indexOf(s) !== -1; });
+  function saveExplored() { try { localStorage.setItem(EKEY, JSON.stringify(explored)); } catch (e) {} }
+  function isExplored(slug) { return explored.indexOf(slug) !== -1; }
+  function setExplored(slug, on) {
+    var has = isExplored(slug);
+    if (on && !has) explored.push(slug);
+    if (!on && has) explored.splice(explored.indexOf(slug), 1);
+    saveExplored(); renderExplored();
+  }
+  function renderExplored() {
+    var n = explored.length, total = holes.length;
+    document.querySelectorAll('[data-slug]').forEach(function (el) {
+      el.classList.toggle('is-explored', isExplored(el.dataset.slug));
+    });
+    document.querySelectorAll('[data-progress]').forEach(function (p) {
+      p.textContent = n === 0 ? 'Open a site to start tracking what you’ve explored.'
+        : n === total ? 'You’ve explored every single one. Legend.'
+        : 'You’ve explored ' + n + '. ' + (total - n) + ' to go.';
+    });
+    document.querySelectorAll('[data-progress-bar]').forEach(function (b) { b.style.width = (total ? n / total * 100 : 0) + '%'; });
+    document.querySelectorAll('[data-progress-reset]').forEach(function (b) { b.hidden = n === 0; });
+    document.querySelectorAll('[data-explore-toggle]').forEach(function (b) {
+      var on = isExplored(b.dataset.exploreToggle);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var l = b.querySelector('[data-label]'); if (l) l.textContent = on ? '✓ Explored' : 'Mark as explored';
+    });
+    if (applyFilters) applyFilters();
+  }
+  document.querySelectorAll('[data-visit]').forEach(function (a) {
+    a.addEventListener('click', function () { setExplored(a.dataset.visit, true); });
+    a.addEventListener('auxclick', function (e) { if (e.button === 1) setExplored(a.dataset.visit, true); });
+  });
+  document.querySelectorAll('[data-explore-toggle]').forEach(function (b) {
+    b.addEventListener('click', function () { setExplored(b.dataset.exploreToggle, !isExplored(b.dataset.exploreToggle)); });
+  });
+  document.querySelectorAll('[data-progress-reset]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (window.confirm('Clear your explored list?')) { explored = []; saveExplored(); renderExplored(); }
+    });
+  });
+  window.addEventListener('storage', function (e) { if (e.key === EKEY) { explored = loadExplored(); renderExplored(); } });
+
+  // ---------- Side panel ----------
   var panel = document.getElementById('all-holes');
   var toggles = document.querySelectorAll('[data-panel-toggle]');
   var desktop = window.matchMedia('(min-width: 1024px)');
-  var KEY = 'mp-panel-hidden';
-
-  function store(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
-
+  var PKEY = 'mp-panel-hidden';
+  function store(v) { try { localStorage.setItem(PKEY, v); } catch (e) {} }
+  function stored() { try { return localStorage.getItem(PKEY); } catch (e) { return null; } }
   function isOpen() { return desktop.matches ? !panel.hidden : body.classList.contains('panel-open'); }
   function sync() {
     var open = isOpen();
@@ -37,43 +86,64 @@
     sync();
   }
 
-  // Random hole
-  var dataEl = document.getElementById('holes-data');
-  var holes = dataEl ? JSON.parse(dataEl.textContent) : [];
+  // ---------- Random hole: prefers ones you haven't explored ----------
   document.querySelectorAll('[data-random]').forEach(function (b) {
     b.addEventListener('click', function () {
       if (!holes.length) return;
-      var here = location.pathname, pick;
-      do { pick = holes[Math.floor(Math.random() * holes.length)]; } while (holes.length > 1 && here.indexOf('/holes/' + pick + '/') !== -1);
-      location.href = '/holes/' + pick + '/';
+      var here = location.pathname;
+      var pool = holes.filter(function (s) { return !isExplored(s) && here.indexOf('/holes/' + s + '/') === -1; });
+      if (!pool.length) pool = holes.filter(function (s) { return here.indexOf('/holes/' + s + '/') === -1; });
+      location.href = '/holes/' + pool[Math.floor(Math.random() * pool.length)] + '/';
     });
   });
 
-  // Filter + search on the homepage
+  // ---------- Homepage filters: time, type, search, hide explored ----------
+  var applyFilters = null;
   var grid = document.getElementById('hole-grid');
   if (grid) {
+    var TIME = { any: [1, 5], quick: [1, 2], hour: [3, 4], night: [5, 5] };
     var cards = Array.prototype.slice.call(grid.querySelectorAll('.card'));
-    var chips = document.querySelectorAll('.chip');
+    var catChips = document.querySelectorAll('.cat-chips .chip');
+    var timeChips = document.querySelectorAll('.time-chips .chip');
     var q = document.getElementById('hole-search');
+    var hideEx = document.getElementById('hide-explored');
     var count = document.getElementById('hole-count');
     var empty = document.getElementById('hole-empty');
-    var cat = 'All';
-    function apply() {
-      var term = (q.value || '').trim().toLowerCase(), n = 0;
+    var cat = 'All', time = 'any';
+    applyFilters = function () {
+      var term = (q.value || '').trim().toLowerCase(), n = 0, range = TIME[time] || TIME.any;
       cards.forEach(function (c) {
-        var ok = (cat === 'All' || c.dataset.cat === cat) && (!term || c.dataset.text.indexOf(term) !== -1);
+        var d = +c.dataset.depth;
+        var ok = (cat === 'All' || c.dataset.cat === cat)
+          && d >= range[0] && d <= range[1]
+          && (!term || c.dataset.text.indexOf(term) !== -1)
+          && !(hideEx.checked && isExplored(c.dataset.slug));
         c.hidden = !ok; if (ok) n++;
       });
       count.textContent = n === cards.length ? 'Showing all' : 'Showing ' + n + ' of ' + cards.length;
       empty.hidden = n !== 0;
-    }
-    chips.forEach(function (ch) {
-      ch.addEventListener('click', function () {
-        cat = ch.dataset.cat;
-        chips.forEach(function (o) { o.setAttribute('aria-pressed', o === ch ? 'true' : 'false'); });
-        apply();
+    };
+    var press = function (group, el) { group.forEach(function (o) { o.setAttribute('aria-pressed', o === el ? 'true' : 'false'); }); };
+    var setTime = function (id) {
+      time = TIME[id] ? id : 'any';
+      timeChips.forEach(function (o) { o.setAttribute('aria-pressed', o.dataset.time === time ? 'true' : 'false'); });
+      applyFilters();
+    };
+    catChips.forEach(function (ch) { ch.addEventListener('click', function () { cat = ch.dataset.cat; press(catChips, ch); applyFilters(); }); });
+    timeChips.forEach(function (ch) { ch.addEventListener('click', function () { setTime(ch.dataset.time); }); });
+    document.querySelectorAll('[data-time-jump]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        setTime(a.dataset.timeJump);
+        history.replaceState(null, '', '/?time=' + time + '#rabbit-holes');
+        document.getElementById('rabbit-holes').scrollIntoView({ behavior: 'smooth' });
       });
     });
-    q.addEventListener('input', apply);
+    q.addEventListener('input', applyFilters);
+    hideEx.addEventListener('change', applyFilters);
+    var initial = new URLSearchParams(location.search).get('time');
+    if (initial) setTime(initial);
   }
+
+  renderExplored();
 })();

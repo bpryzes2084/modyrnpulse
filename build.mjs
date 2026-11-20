@@ -12,6 +12,12 @@ const curated = read('data/curated.json');
 
 const CATS = ['Interactive Wonders', 'Weird Web', 'Archives', 'Live Planet', 'Knowledge Spirals'];
 const DEPTH = ['', 'Quick dip', 'Shallow', 'Deep', 'Very deep', 'Bottomless'];
+const TIMES = [
+  { id: 'any', label: 'Any time', hint: '' },
+  { id: 'quick', label: '5 minutes', hint: 'Quick dips', min: 1, max: 2 },
+  { id: 'hour', label: 'An hour', hint: 'Deep, not endless', min: 3, max: 4 },
+  { id: 'night', label: 'All night', hint: 'Bottomless', min: 5, max: 5 },
+];
 const pad = (n) => String(n).padStart(2, '0');
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const host = (u) => u.replace(/^https?:\/\//, '').replace(/\/$/, '');
@@ -39,11 +45,12 @@ function sidePanel(current) {
     const items = holes.filter((h) => h.cat === cat);
     return `<details class="side-group" open>
   <summary>${esc(cat)}<span class="count">${items.length}</span></summary>
-  <ul>${items.map((h) => `<li><a href="${holePath(h)}"${current && current.slug === h.slug ? ' aria-current="page"' : ''}><span class="n">${pad(h.num)}</span><span>${esc(h.name)}</span></a></li>`).join('')}</ul>
+  <ul>${items.map((h) => `<li><a href="${holePath(h)}" data-slug="${h.slug}"${current && current.slug === h.slug ? ' aria-current="page"' : ''}><span class="n">${pad(h.num)}</span><span>${esc(h.name)}</span></a></li>`).join('')}</ul>
 </details>`;
   }).join('\n');
   return `<aside id="all-holes" class="side-panel" aria-label="All rabbit holes">
-  <div class="side-head"><h2>All rabbit holes</h2><button type="button" class="btn btn-ghost side-close" data-panel-close aria-label="Close list">Close</button><span>${CATS.length} categories</span></div>
+  <div class="side-head"><h2>All rabbit holes</h2><button type="button" class="btn btn-ghost side-close" data-panel-close aria-label="Close list">Close</button></div>
+  <div class="progress" data-progress-box><p data-progress>Open a site to start tracking what you’ve explored.</p><div class="progress-bar" aria-hidden="true"><i data-progress-bar></i></div><button type="button" class="link-btn" data-progress-reset hidden>Reset progress</button></div>
   ${groups}
 </aside>
 <div class="scrim" data-panel-close></div>`;
@@ -51,8 +58,8 @@ function sidePanel(current) {
 
 function card(h) {
   const text = esc(`${h.name} ${host(h.url)} ${h.cat} ${h.blurb}`.toLowerCase());
-  return `<a class="card" href="${holePath(h)}" data-cat="${esc(h.cat)}" data-text="${text}">
-  <div class="card-top"><span class="n">${pad(h.num)}</span><span class="cat">${esc(h.cat)}</span></div>
+  return `<a class="card" href="${holePath(h)}" data-slug="${h.slug}" data-depth="${h.depth}" data-cat="${esc(h.cat)}" data-text="${text}">
+  <div class="card-top"><span class="n">${pad(h.num)}</span><span class="explored-badge">✓ Explored</span><span class="cat">${esc(h.cat)}</span></div>
   <h3>${esc(h.name)}</h3>
   <p class="url">${esc(host(h.url))}</p>
   <p class="blurb">${esc(h.blurb)}</p>
@@ -165,7 +172,10 @@ function home() {
     </div>
     <div class="hero-cta">
       <button type="button" class="btn btn-accent btn-lg" data-random>Fall into a random one <span aria-hidden="true">↓</span></button>
-      <a class="btn btn-ghost btn-lg" href="#rabbit-holes">Browse them all</a>
+      <div class="time-hero" role="group" aria-labelledby="time-q">
+        <p id="time-q">How much time do you have?</p>
+        ${TIMES.slice(1).map((t) => `<a class="btn btn-ghost time-jump" href="/?time=${t.id}#rabbit-holes" data-time-jump="${t.id}"><span>${t.label}</span><span class="hint">${t.hint}</span></a>`).join('')}
+      </div>
     </div>
   </section>
 
@@ -179,7 +189,7 @@ function home() {
     </div>
     <div class="featured-actions">
       <a class="btn btn-light" href="${holePath(f)}">Read the guide</a>
-      <a class="btn btn-ghost" href="${esc(f.url)}" target="_blank" rel="noopener">Visit the site ↗</a>
+      <a class="btn btn-ghost" href="${esc(f.url)}" target="_blank" rel="noopener" data-visit="${f.slug}">Visit the site ↗</a>
     </div>
   </section>
 
@@ -203,10 +213,15 @@ function home() {
       <h2 class="h2" id="all-title">All rabbit holes</h2>
       <div class="search"><label for="hole-search">Search the holes</label><input class="input" id="hole-search" type="search" placeholder="Try “maps” or “archive”"></div>
     </div>
-    <div class="chips" role="group" aria-label="Filter by category">
+    <div class="chips time-chips" role="group" aria-label="How much time do you have?">
+      <span class="chips-label">Time</span>
+      ${TIMES.map((t, i) => `<button type="button" class="chip" data-time="${t.id}" aria-pressed="${i === 0}">${t.label}</button>`).join('\n      ')}
+    </div>
+    <div class="chips cat-chips" role="group" aria-label="Filter by category">
+      <span class="chips-label">Type</span>
       ${['All', ...CATS].map((c, i) => `<button type="button" class="chip" data-cat="${esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join('\n      ')}
     </div>
-    <p class="count-label" id="hole-count" aria-live="polite">Showing all</p>
+    <div class="list-meta"><p class="count-label" id="hole-count" aria-live="polite">Showing all</p><label class="hide-explored"><input type="checkbox" id="hide-explored"> Hide ones I’ve explored</label></div>
     <div class="grid" id="hole-grid">
       ${holes.map(card).join('\n')}
     </div>
@@ -248,8 +263,9 @@ function holePage(h, i) {
       <p class="lede">${esc(h.blurb)}</p>
     </div>
     <div class="cta">
-      <a class="btn btn-accent btn-lg" href="${esc(h.url)}" target="_blank" rel="noopener">Visit ${esc(h.name)} <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-accent btn-lg" href="${esc(h.url)}" target="_blank" rel="noopener" data-visit="${h.slug}">Visit ${esc(h.name)} <span aria-hidden="true">↗</span></a>
       <p>${esc(host(h.url))}</p>
+      <button type="button" class="btn btn-ghost explore-toggle" data-explore-toggle="${h.slug}" aria-pressed="false"><span data-label>Mark as explored</span></button>
     </div>
   </section>
   <section class="facts" aria-label="At a glance">${facts}</section>
